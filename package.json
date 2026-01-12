@@ -1,0 +1,46 @@
+{
+  "name": "kmed-dashboard",
+  "version": "1.0.0",
+  "description": "KMED Healthcare Fraud Detection System with PostgreSQL Integration",
+  "main": "backend-server-postgres.js",
+  "scripts": {
+    "start": "node backend-server.js",
+    "dev": "nodemon backend-server.js",
+    "frontend": "http-server -p 3000 -o index.html",
+    "setup": "psql -U postgres -d kmed_system -f database-setup.sql",
+    "seed": "node seed-database.js",
+    "migrate": "psql -U postgres -d kmed_system -f database-setup.sql && npm run seed",
+    "create-user": "node create-user.js",
+    "create-user-interactive": "node create-user.js create interactive",
+    "list-users": "node create-user.js list",
+    "reset-password": "node create-user.js reset-password",
+    "setup-google": "node google-oauth-setup.js setup",
+    "setup-google-db": "node google-oauth-setup.js database",
+    "list-google-users": "node admin-role-management.js list",
+    "upgrade-user": "node admin-role-management.js upgrade",
+    "bulk-upgrade": "node admin-role-management.js bulk-upgrade",
+    "role-stats": "node admin-role-management.js stats"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.3",
+    "dotenv": "^16.3.1",
+    "googleapis": "^128.0.0",
+    "express-session": "^1.17.3",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "http-server": "^14.1.1"
+  },
+  "keywords": ["healthcare", "dashboard", "fraud-detection", "postgresql", "database", "api"],
+  "author": "KMED Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,35 @@
+services:
+  # Backend API Server
+  - type: web
+    name: kmed-backend
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: DB_HOST
+        value: ${DATABASE_URL}
+      - key: DB_USER
+        value: ${DB_USER}
+      - key: DB_PASSWORD
+        value: ${DB_PASSWORD}
+      - key: DB_NAME
+        value: ${DB_NAME}
+      - key: JWT_SECRET
+        value: ${JWT_SECRET}
+
+  # Frontend Static Site
+  - type: web
+    name: kmed-frontend
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "npm run frontend"
+    healthCheckPath: /
+    envVars:
+      - key: FRONTEND_URL
+        value: https://kmed-backend.onrender.com
